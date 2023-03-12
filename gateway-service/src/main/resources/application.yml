@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://authservice
+          predicates:
+            - Path=/oauth/**
+        - id: account_service
+          uri: lb://accountservice
+          predicates:
+            - Path=/account/**

@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.0.106:3306/account_service?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    hikari:
+      username: root
+      password: Qpmz1397
+      driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: del_flag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
