@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cdu.cyj.product.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="cdu.cyj.common.domain.pojo.Product">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="thumbnail" column="thumbnail" jdbcType="VARCHAR"/>
+            <result property="subimages" column="subimages" jdbcType="VARCHAR"/>
+            <result property="detail" column="detail" jdbcType="VARCHAR"/>
+            <result property="monthlySales" column="monthly_sales" jdbcType="INTEGER"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="stock" column="stock" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="delFlag" column="del_flag" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,shop_id,name,
+        thumbnail,subimages,detail,monthly_sales,
+        price,stock,status,
+        create_by,create_time,update_by,
+        update_time,del_flag
+    </sql>
+</mapper>

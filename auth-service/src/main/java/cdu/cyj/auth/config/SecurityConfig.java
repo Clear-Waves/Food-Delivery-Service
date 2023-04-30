@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .cors();
     }
 }

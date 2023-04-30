@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cdu.cyj.product.mapper.ShopMapper">
+
+    <resultMap id="BaseResultMap" type="cdu.cyj.common.domain.pojo.Shop">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="thumbnail" column="thumbnail" jdbcType="VARCHAR"/>
+            <result property="signboard" column="signboard" jdbcType="VARCHAR"/>
+            <result property="score" column="score" jdbcType="DECIMAL"/>
+            <result property="monthlySale" column="monthly_sale" jdbcType="INTEGER"/>
+            <result property="deliveryCost" column="delivery_cost" jdbcType="DECIMAL"/>
+            <result property="perCapitaCost" column="per_capita_cost" jdbcType="DECIMAL"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="delFlag" column="del_flag" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,description,thumbnail,
+        signboard,score,monthly_sale,
+        delivery_cost,per_capita_cost,address,
+        status,create_by,create_time,
+        update_by,update_time,del_flag
+    </sql>
+</mapper>

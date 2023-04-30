@@ -13,9 +13,12 @@ import java.util.List;
 @RequestMapping("/account")
 public interface AccountServiceClient {
 
-    @GetMapping("/{username}")
-    User getUserByUsername(@PathVariable("username") String username);
+    @GetMapping("/getUserByUserName")
+    User getUserByUsername(@RequestParam("username") String username);
 
     @GetMapping("/getPerm")
     List<String> getPermByUserId(@RequestParam("userId") Long userId);
+
+    @GetMapping("/user/{id}")
+    User getUserById(@PathVariable("id") Long id);
 }

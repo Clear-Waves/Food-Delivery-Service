@@ -20,6 +20,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         User user = accountServiceClient.getUserByUsername(name);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户未找到");
+        }
         List<String> permissions = accountServiceClient.getPermByUserId(user.getId());
         return new UserDetail(user, permissions);
     }

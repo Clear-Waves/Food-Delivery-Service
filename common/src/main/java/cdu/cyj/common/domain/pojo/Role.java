@@ -1,9 +1,7 @@
 package cdu.cyj.common.domain.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -39,6 +37,7 @@ public class Role implements Serializable {
     /**
      * 
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
@@ -49,11 +48,13 @@ public class Role implements Serializable {
     /**
      * 
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
      * 
      */
+    @TableLogic
     private Integer delFlag;
 
     @TableField(exist = false)

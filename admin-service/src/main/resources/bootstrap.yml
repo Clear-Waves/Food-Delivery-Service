@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: adminservice
+  cloud:
+    nacos:
+      server-addr: localhost:8848

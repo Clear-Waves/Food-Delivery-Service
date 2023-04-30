@@ -17,14 +17,19 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable("username") String username) {
+    @GetMapping("/getUserByUserName")
+    public User getUserByUsername(String username) {
         return userService.getUserByUsername(username);
     }
 
     @GetMapping("/getPerm")
     public List<String> getPermByUserId(Long userId) {
         return userService.getPermsByUserId(userId);
+    }
+
+    @GetMapping("/user/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.getById(id);
     }
 
 }

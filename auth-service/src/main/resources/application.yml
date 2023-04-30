@@ -7,7 +7,7 @@ spring:
     nacos:
       server-addr: localhost:8848
   datasource:
-    url: jdbc:mysql://192.168.0.106:3306/account_service?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.0.105:3306/account_service?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     hikari:
       username: root
       password: Qpmz1397

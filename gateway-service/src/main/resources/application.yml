@@ -7,12 +7,48 @@ spring:
     nacos:
       server-addr: localhost:8848
     gateway:
+#      filter:
+#        remove-hop-by-hop:
+#          headers:
+#            # 以下是去掉网关默认去掉的请求响应头
+#            - trailer
+#            - te
+#            - keep-alive
+#            - transfer-encoding
+#            - upgrade
+#            - proxy-authenticate
+#            - connection
+#            - proxy-authorization
+#            - x-application-context
+#            # 以下是去掉服务层面定义的跨域
+#            - access-control-allow-credentials
+#            - access-control-allow-headers
+#            - access-control-allow-methods
+#            - access-control-allow-origin
+#            - access-control-max-age
+#            - vary
+      globalcors:
+        cors-configurations:
+          '[/**]':
+              allowCredentials: true
+              allowedOrigins: "*"
+              allowedHeaders: "*"
+              allowedMethods: "*"
+              maxAge: 3628800
       routes:
         - id: auth-service
           uri: lb://authservice
           predicates:
             - Path=/oauth/**
-        - id: account_service
-          uri: lb://accountservice
+          filters:
+            - AddRequestParameter=client_id,web
+            - AddRequestParameter=client_secret,web
+            - AddRequestParameter=grant_type,password
+        - id: admin-service
+          uri: lb://adminservice
           predicates:
-            - Path=/account/**
+            - Path=/admin/**
+        - id: user-serivce
+          uri: lb://userservice
+          predicates:
+            - Path=/customer/**
