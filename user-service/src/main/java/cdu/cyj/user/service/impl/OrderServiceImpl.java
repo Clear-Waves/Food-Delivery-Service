@@ -5,6 +5,7 @@ import cdu.cyj.common.domain.pojo.*;
 import cdu.cyj.common.utils.BeanCopyUtils;
 import cdu.cyj.openfeign.clients.OrderServiceClient;
 import cdu.cyj.openfeign.clients.ProductServiceClient;
+import cdu.cyj.user.domain.vo.CommentOrderVo;
 import cdu.cyj.user.domain.vo.OrderListVo;
 import cdu.cyj.user.domain.vo.OrderProductListVo;
 import cdu.cyj.user.service.OrderService;
@@ -37,7 +38,8 @@ public class OrderServiceImpl implements OrderService {
         statusMap.put(2, "商家已接单");
         statusMap.put(3, "配送中");
         statusMap.put(4, "送达");
-        statusMap.put(5, "订单完成");
+        statusMap.put(5, "待评价");
+        statusMap.put(6, "已完成");
         List<OrderListVo> orderListVos = orderList
                 .stream()
                 .map(order -> {
@@ -151,13 +153,42 @@ public class OrderServiceImpl implements OrderService {
         }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.set("orderId", order.getId());
+        jsonObject.set("orderId", orderId);
         return ResponseResult.okResult(jsonObject);
     }
 
     @Override
-    public ResponseResult<?> payOrder(Long orderId) {
-        return null;
+    public ResponseResult<?> payOrder(Long orderId, String paymentType, BigDecimal payment) {
+        // 判断订单与用户是否吻合
+        Long userId = SecurityUtil.getUserId();
+        Order order = orderServiceClient.getOrderById(orderId);
+        if (!Objects.equals(order.getUserId(), userId)) {
+            return ResponseResult.errorResult(500, "订单与用户不符合");
+        }
+        // 判断订单状态
+        if (order.getStatus() != 0) {
+            return ResponseResult.errorResult(500, "订单状态错误");
+        }
+
+        // 支付
+        Order orderSave = new Order();
+        orderSave.setId(orderId);
+        orderSave.setStatus(1);
+        orderSave.setPayment(payment);
+        if ("Alipay".equals(paymentType)) {
+            orderSave.setPaymentType(2);
+        } else if ("WeChat".equals(paymentType)) {
+            orderSave.setPaymentType(3);
+        } else {
+            orderSave.setPaymentType(1);
+        }
+        orderSave.setPaymentTime(new Date());
+        orderSave.setUpdateBy(userId);
+        if (orderServiceClient.updateOrder(orderSave)) {
+            return ResponseResult.okResult();
+        } else {
+            return ResponseResult.errorResult(500, "支付错误");
+        }
     }
 
     @Override
@@ -168,5 +199,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ResponseResult<?> cancelOrder(Long orderId) {
         return null;
+    }
+
+    @Override
+    public ResponseResult<?> getCommentOrderInfo(Long orderId) {
+        Order order = orderServiceClient.getOrderById(orderId);
+        Shop shop = productServiceClient.getShopById(order.getShopId());
+        CommentOrderVo commentOrderVo = new CommentOrderVo();
+        commentOrderVo.setThumbnail(shop.getThumbnail());
+        commentOrderVo.setShopName(shop.getName());
+        return ResponseResult.okResult(commentOrderVo);
     }
 }

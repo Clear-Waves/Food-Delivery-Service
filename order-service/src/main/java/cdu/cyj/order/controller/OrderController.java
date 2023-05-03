@@ -22,6 +22,21 @@ public class OrderController {
         return orderService.getOrderListByUserId(userId);
     }
 
+    @GetMapping("/{id}")
+    public Order getOrderById(@PathVariable("id") Long id) {
+        return orderService.getById(id);
+    }
+
+    @GetMapping("/listByStatus")
+    public List<Order> getOrderListByStatus(Integer status) {
+        return orderService.listByStatus(status);
+    }
+
+    @GetMapping("/listByStatusAndRiderId")
+    public List<Order> getOrderListByStatusAndRiderId(Integer status, Long riderId) {
+        return orderService.listByStatusAndRiderId(status, riderId);
+    }
+
     /*  添加接口  */
 
     @PostMapping

@@ -28,6 +28,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         wrapper.eq(Order::getUserId, userId);
         return orderMapper.selectList(wrapper);
     }
+
+    @Override
+    public List<Order> listByStatus(Integer status) {
+        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Order::getStatus, status);
+        return orderMapper.selectList(wrapper);
+    }
+
+    @Override
+    public List<Order> listByStatusAndRiderId(Integer status, Long riderId) {
+        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Order::getStatus, status).eq(Order::getRiderId, riderId);
+        return orderMapper.selectList(wrapper);
+    }
 }
 
 

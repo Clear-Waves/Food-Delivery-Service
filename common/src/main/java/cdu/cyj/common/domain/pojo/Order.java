@@ -31,6 +31,11 @@ public class Order implements Serializable {
     private Long shopId;
 
     /**
+     * 骑手id
+     */
+    private Long riderId;
+
+    /**
      * 付款金额
      */
     private BigDecimal payment;

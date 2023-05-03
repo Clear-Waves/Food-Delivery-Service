@@ -39,6 +39,13 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart>
         return cartMapper.updateById(cart) == 1;
     }
 
+    @Override
+    public Cart getCartByProductId(Long productId) {
+        LambdaQueryWrapper<Cart> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Cart::getProductId, productId);
+        return cartMapper.selectOne(wrapper);
+    }
+
 }
 
 

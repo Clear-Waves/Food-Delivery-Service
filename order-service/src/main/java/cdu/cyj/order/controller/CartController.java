@@ -19,6 +19,11 @@ public class CartController {
         return cartService.getCartListByUserId(userId);
     }
 
+    @GetMapping("/getCartByProductId")
+    public Cart getCartByProductId(Long productId) {
+        return cartService.getCartByProductId(productId);
+    }
+
     @PostMapping
     public Long addCart(@RequestBody Cart cart) {
         if (cartService.save(cart)) {

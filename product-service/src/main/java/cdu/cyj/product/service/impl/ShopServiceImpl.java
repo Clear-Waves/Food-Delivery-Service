@@ -2,6 +2,7 @@ package cdu.cyj.product.service.impl;
 
 import cdu.cyj.common.domain.pojo.Shop;
 import cdu.cyj.product.mapper.ShopMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cdu.cyj.product.service.ShopService;
@@ -32,6 +33,13 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop>
     @Override
     public Shop getShopDetail(Long shopId) {
         return getById(shopId);
+    }
+
+    @Override
+    public List<Shop> getShopListByUserId(Long userId) {
+        LambdaQueryWrapper<Shop> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Shop::getCreateBy, userId);
+        return shopMapper.selectList(wrapper);
     }
 }
 

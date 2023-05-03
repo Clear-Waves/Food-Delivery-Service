@@ -20,6 +20,7 @@
         <module>merchant-service</module>
         <module>admin-service</module>
         <module>rider-service</module>
+        <module>file-service</module>
     </modules>
 
     <properties>

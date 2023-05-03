@@ -52,3 +52,11 @@ spring:
           uri: lb://userservice
           predicates:
             - Path=/customer/**
+        - id: merchant-service
+          uri: lb://merchantservice
+          predicates:
+            - Path=/merchant/**
+        - id: rider-service
+          uri: lb://riderservice
+          predicates:
+            - Path=/rider/**

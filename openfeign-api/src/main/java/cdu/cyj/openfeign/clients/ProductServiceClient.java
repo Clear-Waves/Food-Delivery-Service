@@ -1,7 +1,9 @@
 package cdu.cyj.openfeign.clients;
 
+import cdu.cyj.common.domain.pojo.Comment;
 import cdu.cyj.common.domain.pojo.Product;
 import cdu.cyj.common.domain.pojo.Shop;
+import cn.hutool.json.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,8 @@ public interface ProductServiceClient {
     @GetMapping("/shop/shopDetail/{shopId}")
     Shop getShopById(@PathVariable("shopId") Long shopId);
 
+    @GetMapping("/shop/listByUserId")
+    List<Shop> getShopListByUserId(@RequestParam("userId") Long userId);
 
     /*  查询商品操作  */
     @GetMapping("/product/productList")
@@ -26,12 +30,26 @@ public interface ProductServiceClient {
     Product getProductById(@PathVariable("id") Long productId);
 
 
+//    @GetMapping("/comment/listByShopId")
+//    List<Comment> getCommentListByShopId(@RequestParam("shopId") Long shopId);
+
+    @GetMapping("/comment/listByCommentIdAndShopId")
+    List<Comment> getCommentListByCommentIdAndShopId(@RequestParam("commentId") Long commentId, @RequestParam("shopId") Long shopId);
+
+    @GetMapping("/comment/listByCommentId")
+    List<Comment> getCommentListByCommentId(@RequestParam("commentId") Long commentId);
+
+
+
     /*  添加操作  */
     @PostMapping("/shop")
     Long addShop(@RequestBody Shop shop);
 
     @PostMapping("/product")
     Long addProduct(@RequestBody Product product);
+
+    @PostMapping("/comment")
+    Long addComment(@RequestBody Comment comment);
 
 
     /*  更新操作  */
@@ -49,4 +67,5 @@ public interface ProductServiceClient {
 
     @DeleteMapping("/product/{id}")
     Boolean deleteProduct(@PathVariable("id") Long id);
+
 }

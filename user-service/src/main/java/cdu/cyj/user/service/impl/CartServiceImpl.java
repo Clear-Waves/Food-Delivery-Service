@@ -74,6 +74,18 @@ public class CartServiceImpl implements CartService {
         // 获取用户id
         Long userId = SecurityUtil.getUserId();
 
+        // 判断此商品的购物车是否存在
+        Cart cartByProductId = orderServiceClient.getCartByProductId(productId);
+        if (Objects.nonNull(cartByProductId)) {
+            cartByProductId.setQuantity(cartByProductId.getQuantity() + 1);
+            if (orderServiceClient.updateCart(cartByProductId)) {
+                return ResponseResult.okResult();
+            } else {
+                return ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+            }
+
+        }
+
         // 获取数据封装Cart类
         Cart cart = new Cart();
         cart.setProductId(productId);

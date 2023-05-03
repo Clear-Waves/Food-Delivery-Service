@@ -13,4 +13,8 @@ import java.util.List;
 public interface OrderService extends IService<Order> {
 
     List<Order> getOrderListByUserId(Long userId);
+
+    List<Order> listByStatus(Integer status);
+
+    List<Order> listByStatusAndRiderId(Integer stats, Long riderId);
 }

@@ -31,7 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/customer/shopList", "/customer/productList/**", "/customer/shop/**").permitAll()
+                .antMatchers("/customer/shopList", "/customer/productList/**", "/customer/shop/**", "/customer/getCommentListByShopId").permitAll()
                 .antMatchers("/**" +
                         "").access("#oauth2.hasScope('all')")
                 .and().csrf().disable()

@@ -26,4 +26,9 @@ public class ShopController {
     public Shop getShopDetail(@PathVariable Long shopId) {
         return shopService.getById(shopId);
     }
+
+    @GetMapping("/listByUserId")
+    public List<Shop> getShopListByUserId(Long userId) {
+        return shopService.getShopListByUserId(userId);
+    }
 }

@@ -18,5 +18,5 @@ public interface CartService extends IService<Cart> {
 
     boolean modifyCart(Cart cart);
 
-
+    Cart getCartByProductId(Long productId);
 }

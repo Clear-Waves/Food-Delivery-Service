@@ -15,11 +15,23 @@ public interface OrderServiceClient {
     @GetMapping("/cart/cartList")
     List<Cart> getCartList(@RequestParam("userId") Long userId);
 
+    @GetMapping("/cart/getCartByProductId")
+    Cart getCartByProductId(@RequestParam("productId") Long productId);
+
     @GetMapping("/order/listByUserId")
     List<Order> getOrderList(@RequestParam("userId") Long userId);
 
     @GetMapping("/orderItem/listByOrderId")
     List<Orderitem> getOrderItemList(@RequestParam("orderId") Long orderId);
+
+    @GetMapping("/order/{id}")
+    Order getOrderById(@PathVariable("id") Long id);
+
+    @GetMapping("/order/listByStatus")
+    List<Order> getOrderByStatus(@RequestParam("status") Integer status);
+
+    @GetMapping("/order/listByStatusAndRiderId")
+    List<Order> getOrderByStatusAndRiderId(@RequestParam("status") Integer status, @RequestParam("riderId") Long riderId);
 
 
     /*  添加操作  */

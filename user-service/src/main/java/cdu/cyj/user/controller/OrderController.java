@@ -18,6 +18,11 @@ public class OrderController {
         return orderService.getOrderList();
     }
 
+    @GetMapping("/getCommentOrderInfo")
+    public ResponseResult<?> getCommentOrderInfo(Long orderId) {
+        return orderService.getCommentOrderInfo(orderId);
+    }
+
     @PostMapping("/submitOrder")
     public ResponseResult<?> submitOrder(@RequestBody JSONObject map) {
         return orderService.submitOrder(map.getLong("shopId"), map.getStr("address"), map.getStr("remark"));
@@ -25,7 +30,7 @@ public class OrderController {
 
     @PutMapping("/payOrder")
     public ResponseResult<?> payOrder(@RequestBody JSONObject paramsMap) {
-        return orderService.payOrder(paramsMap.getLong("orderId"));
+        return orderService.payOrder(paramsMap.getLong("orderId"), paramsMap.getStr("paymentType"), paramsMap.getBigDecimal("payment"));
     }
 
     @GetMapping("/orderDetail")
